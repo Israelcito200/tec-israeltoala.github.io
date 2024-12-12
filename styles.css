@@ -6,10 +6,6 @@
     margin: 0 auto;
 }
 
-.texto, .imagen {
-    flex: 1;
-    padding: 20px;
-}
 
 .texto {
     flex: 1;
@@ -19,9 +15,6 @@
    
 }
 
-.navbar-nav {
-    justify-content: center;
-}
 .custom-link {
     font-size: 1.5rem;
     padding: 1rem 1.5rem;
