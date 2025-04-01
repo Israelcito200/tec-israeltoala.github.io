@@ -47,10 +47,28 @@ svg{
 
 .card{
   width: 400px;
-  height: 600px;
+  height: 550px;
+  background: #1a1a1a;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;  /* Transición suave para el zoom y el brillo */
+
   
+    
 
+}
 
+.card:hover {
+    transform: scale(1.05); /* Aumenta ligeramente el tamaño de la tarjeta */
+    box-shadow: 0 8px 16px rgba(255, 255, 255, 0.3);  /* Sombra más intensa para resaltar */
+    border: 2px solid #c9c9c9;  /* Borde verde brillante */
 }
 .grid-container {
     display: grid;
@@ -80,10 +98,105 @@ svg{
             border-radius: 8px;
             margin-bottom: 15px; /* Espacio entre la imagen y el contenido de la card */
         }
+
+        #lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 70%;
+            height: 70%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            
+        }
+
+        #lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        #lightbox:target {
+            display: flex;
+        }
+
+        /* Para cerrar el lightbox */
+        #close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 30px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Estilo para el separador (línea horizontal) */
+        .card-footer {
+    margin-top: auto;  /* Empuja el contenido hacia abajo */
+}
+
+/* Estilo para el separador (línea horizontal) */
+hr {
+    border: 0;
+    border-top: 1px solid #ddd; /* Línea gris */
+    margin: 20px 0;  /* Espaciado arriba y abajo */
+}
+
+/* Estilo para el enlace */
+.project-link {
+    text-align: center;
+}
+
+.project-link a {
+    color: #ffb300;  /* Color verde */
+    font-weight: bold;
+    text-decoration: none;  /* Eliminar subrayado */
+}
+
+.project-link a:hover {
+    text-decoration: underline;  /* Subrayado al pasar el ratón */
+}
+
+.navbar {
+    background-color: #000000 !important; /* Color de fondo negro */
+}
+
+
     </style>
 
 </head>
 <body >
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #000000;">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" style="font-size: 20px; padding: 10px 20px;" href="index.html">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="font-size: 20px; padding: 10px 20px;" href="https://github.com/Israelcito200" target="_blank">Github</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="font-size: 20px; padding: 10px 20px;" href="https://www.linkedin.com/in/israel-antonio-toala-soliz-27a78a1b7/" target="_blank">LinkedIn</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="font-size: 20px; padding: 10px 20px;" href="https://wa.me/593979945058" target="_blank">Whatsapp</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="font-size: 20px; padding: 10px 20px;" href="./proyectos-github.html">Proyectos</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
 
   <svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
    width="600px" height="100px" viewBox="0 0 600 100">
@@ -172,11 +285,93 @@ svg{
 
 
 <div class="grid-container">
-  <div class="card"><p class="title">ERP GESTIÓN DE CLIENTES</p><p class="subtitle">App web ASP.NET CORE MODELO VISTA CONTROLADOR (MVC).</p><img src="sa1.jpg" alt="Imagen 1"></div>
-  <div class="card"><p class="title">ERP GESTIÓN EMPRESARIAL CLIENTES</p><p class="subtitle">Aplicación de Windows (Winforms) desarrollado con .NET Framework, Entity Framework y base de datos.</p><img src="sa3.jpeg" alt="Imagen 3"></div>
-  <div class="card"><p class="title">Sistema Académico</p><p class="subtitle">Gestiona Estuiantes, cursos, notas con base de datos, php y laravel.</p><img src="sa.jpeg" alt="Imagen 3"></div>
-  <div class="card"><p class="title">Chat en Línea - Herramienta</p><p class="subtitle">Chat grupal en tiempo Real con nombre de usuario</p><img src="chatenlínea.png" alt="Imagen 3"></div>
-  <div class="card"><p class="title">Administrador de Tareas Kanban</p><p class="subtitle">Aplicacion Web de Kanban para gestionar tareas pendientes, en proceso y finalizadas.</p></div>
+  <div class="card"><p class="title">ERP GESTIÓN DE CLIENTES</p><p class="subtitle">App web ASP.NET CORE MODELO VISTA CONTROLADOR (MVC).</p><a><img src="sa1.jpg" alt="Imagen 1" onclick="openLightbox('sa1.jpg')"></a>
+  
+    <div class="card-footer">
+      <!-- Separador -->
+      <hr>
+      
+      <!-- Enlace al proyecto de GitHub -->
+      <p class="project-link">
+          <a href="https://github.com/Israelcito200/ControlClientes" target="_blank">Ir a GitHub Proyecto</a>
+      </p>
+  </div>
+  
+  
+  </div>
+  
+
+  <div class="card"><p class="title">ERP GESTIÓN EMPRESARIAL CLIENTES</p><p class="subtitle">Aplicación de Windows (Winforms) desarrollado con .NET Framework, Entity Framework y base de datos.</p><a><img src="sa3.jpeg" alt="Imagen 3"onclick="openLightbox('sa3.jpeg')"></a>
+  
+    <div class="card-footer">
+      <!-- Separador -->
+      <hr>
+      
+      <!-- Enlace al proyecto de GitHub -->
+      <p class="project-link">
+          <a href="https://github.com/Israelcito200/GestionDeClientesDazzsoft" target="_blank">Ir a GitHub Proyecto</a>
+      </p>
+  </div>
 </div>
+
+
+  <div class="card"><p class="title">Sistema Académico</p><p class="subtitle">Gestiona Estuiantes, cursos, notas con base de datos, php y laravel.</p><a><img src="sa.jpeg" alt="Imagen 3" onclick="openLightbox('sa.jpeg')"></a>
+  
+    <div class="card-footer">
+      <!-- Separador -->
+      <hr>
+      
+      <!-- Enlace al proyecto de GitHub -->
+      <p class="project-link">
+          <a href="https://github.com/Israelcito200/Sistema_institucional" target="_blank">Ir a GitHub Proyecto</a>
+      </p>
+  </div>
+</div>
+
+
+  <div class="card"><p class="title">Chat en Línea - Herramienta</p><p class="subtitle">Chat grupal en tiempo Real con nombre de usuario</p><a><img src="chatenlínea.png" alt="Imagen 3" onclick="openLightbox('chatenlínea.png')"></a>
+  
+    <div class="card-footer">
+      <!-- Separador -->
+      <hr>
+      
+      <!-- Enlace al proyecto de GitHub -->
+      <p class="project-link">
+          <a href="https://github.com/Israelcito200/chat-en-tiempo-real" target="_blank">Ir a GitHub Proyecto</a>
+      </p>
+  </div>
+</div>
+
+<div class="card"><p class="title">Administrador de Tareas Kanban</p><p class="subtitle">Aplicacion Web de Kanban para gestionar tareas pendientes, en proceso y finalizadas.</p>
+
+  <div class="card-footer">
+    <!-- Separador -->
+    <hr>
+    
+    <!-- Enlace al proyecto de GitHub -->
+    <p class="project-link">
+        <a href="https://github.com/tu-usuario/tu-repositorio" target="_blank">Ir a GitHub Proyecto</a>
+    </p>
+</div>
+</div>
+
+</div>
+<div id="lightbox">
+  <button id="close" onclick="closeLightbox()">✖</button>
+  <img id="lightboxImage" src="" alt="Imagen Grande">
+</div>
+
+<script>
+  function openLightbox(imageSrc) {
+      document.getElementById('lightboxImage').src = imageSrc;
+      document.getElementById('lightbox').style.display = 'flex';
+  }
+
+
+  function closeLightbox() {
+    var lightbox = document.getElementById('lightbox');
+    lightbox.style.display = 'none';  // Oculta el lightbox
+}
+</script>
 </body>
 </html>
